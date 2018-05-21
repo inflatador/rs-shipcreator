@@ -92,7 +92,8 @@ def get_auth_token(username,password):
     data = r.json()
     #assign token and account variables with info from json response.
     auth_token = data["access"]["token"]["id"]
-    tenant_id = data["access"]["token"]["tenant"["id"]
+    tenant_id = data["access"]["token"]["tenant"]["id"]
+    return auth_token, tenant_id
 
 def find_endpoints(auth_token, region, desired_service="cloudNetworks"):
 
@@ -145,7 +146,7 @@ def create_shared_ip(auth_token, headers, neutron_endpoint, net_id, shared_ip, n
 def main(region, net_id, shared_ip):
     username,password = getset_keyring_credentials()
 
-    auth_token = get_auth_token(username, password)
+    auth_token,tenant_id = get_auth_token(username, password)
 
     find_endpoints(auth_token, region)
 
