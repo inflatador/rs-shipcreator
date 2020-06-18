@@ -155,7 +155,7 @@ def create_shared_ip(cloud_network, cn_endpoint, headers, ip_version,
         net_id = cloud_network
     ips_url = "{}/ip_addresses".format(cn_endpoint)
     payload = ({'ip_address': { 'network_id': net_id,
- 				'version': '6',
+ 				'version': ip_version,
 				'port_ids': shared_ip_ports}
  				})
     print ("Provisioning Shared IP on network {}".format(cloud_network))
